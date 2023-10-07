@@ -1,0 +1,82 @@
+{
+  "name": "@ollyv/express",
+  "version": "0.0.1",
+  "description": "Express Logging Module",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "type": "module",
+  "files": [
+    "dist/**/*",
+    "LICENSE",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "start": "concurrently \"tsc -w\" \"nodemon dist/index\"",
+    "clean": "rm -rf ./dist",
+    "config:esm": "cp ./configs/package.esm.json ./dist/esm/package.json",
+    "config:cjs": "cp ./configs/package.cjs.json ./dist/cjs/package.json",
+    "build:cjs": "babel src -d dist/cjs --env-name cjs --copy-files --plugins=@babel/plugin-transform-modules-commonjs && npm run config:cjs",
+    "build:esm": "babel src -d dist/esm --env-name esm --copy-files && npm run config:esm",
+    "build": "npm run clean t && npm run build:cjs && npm run build:esm",
+    "test": "jest",
+    "prepack": "npm run build",
+    "jsdoc": "./node_modules/.bin/jsdoc -c jsdoc.config.json ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awslabs/observability-solution-kit.git"
+  },
+  "keywords": [
+    "logging",
+    "express",
+    "log",
+    "handler",
+    "middleware",
+    "asynclocalstorage"
+  ],
+  "author": "AWS Professional Services",
+  "license": "ISC",
+  "bugs": {
+    "url": "hhttps://github.com/awslabs/observability-solution-kit/issues"
+  },
+  "homepage": "hhttps://github.com/awslabs/observability-solution-kit#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.22.5",
+    "@babel/core": "^7.22.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@types/sqs-consumer": "^5.0.0",
+    "babel-jest": "^29.5.0",
+    "clean-jsdoc-theme": "^4.2.9",
+    "esm": "^3.2.25",
+    "jest": "^29.5.0",
+    "jsdoc": "^4.0.2",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "async_hooks": "^1.0.0",
+    "aws-sdk": "^2.1398.0",
+    "aws-xray-sdk": "^3.5.0",
+    "callee": "^1.1.1",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
+    "properties-reader": "^2.2.0",
+    "sqs-consumer": "^5.8.0",
+    "winston": "^3.9.0"
+  },
+  "engines": {
+    "npm": "^9.5.1",
+    "node": "^18.16.0"
+  }
+}

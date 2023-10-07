@@ -1,0 +1,17 @@
+# node modules
+node_modules
+
+# build output
+lib/
+dist/
+
+# local test 
+# test/
+
+# common example code
+common/
+
+*.tgz
+
+coverage/
+docs/

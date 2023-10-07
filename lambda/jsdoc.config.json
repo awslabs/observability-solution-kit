@@ -1,0 +1,32 @@
+{
+  "plugins": ["plugins/markdown"],
+  "opts": {
+    "readme": "./README.md",
+    "destination": "./docs",
+    "template": "node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "default_theme": "dark",
+      "search": false,
+      "title": "<a href=\"index.html\" class=\"sidebar-title\" >5k-saas: NodeLambda</a>",
+      "homepageTitle": "5k-saas Docs: NodeLambda",
+      "includeFilesListInHomepage": true
+    }
+  },
+  "script": {
+    "generate-docs": "jsdoc --configure jsdoc.json --verbose"
+  },
+  "recurseDepth": 10,
+  "source": {
+    "include": ["src", "src/const", "src/middleware", "src/service"],
+    "includePattern": ".(jsx|js|ts|tsx)$"
+  },
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}

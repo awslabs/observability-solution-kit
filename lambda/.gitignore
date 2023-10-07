@@ -1,0 +1,13 @@
+# node modules
+node_modules/
+
+# build output
+lib/
+dist/
+layers/
+
+# archive
+extensions.zip
+
+# for local
+**.tgz
