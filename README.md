@@ -1,10 +1,6 @@
 # Ollyv SDK
 
 <p align="center">
-    <img src="./docs/image/logo.png" alt="Ollyv sdk logo" height="180">
-</p>
-
-<p align="center">
 Welcome to the Ollyv sdk! Ollyv sdk is designed to empower your applications with seamless <a href="https://aws-observability.github.io/observability-best-practices/signals/logs/">logging</a> and comprehensive distributed <a href="https://aws-observability.github.io/observability-best-practices/signals/traces/">tracing</a> capabilities.
 </p>
 
