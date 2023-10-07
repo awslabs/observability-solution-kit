@@ -1,6 +1,6 @@
-# Ollyv SDK
+# 🫒 Ollyv SDK
 
-<p align="center">
+ <p align="center">
 Welcome to the Ollyv sdk! Ollyv sdk is designed to empower your applications with seamless <a href="https://aws-observability.github.io/observability-best-practices/signals/logs/">logging</a> and comprehensive distributed <a href="https://aws-observability.github.io/observability-best-practices/signals/traces/">tracing</a> capabilities.
 </p>
 
@@ -12,7 +12,7 @@ Welcome to the Ollyv sdk! Ollyv sdk is designed to empower your applications wit
   <a href="./sdk/spring/README.md"> JavaSpring 🦚</a>
 </p>
 
-### 👁️ Key feature
+### 🫒 Key feature
 1. Context-aware Logging:
     * Enables logging for each context defined by builders (user/group/deviceId/country, etc.).
     * Automatic extraction of predefined contexts ensures effortless filtering and monitoring of specific activities.
@@ -21,7 +21,7 @@ Welcome to the Ollyv sdk! Ollyv sdk is designed to empower your applications wit
     * Provides detailed tracing of interactions between services.
     * Enables distributed tracing in complex environments, allowing correlation among multiple interconnected services.
 
-### 👁️ Centralized Logging Architecture
+### 🫒 Centralized Logging Architecture
 The Observability SDK (Ollyv) features a robust Centralized Logging Architecture, ensuring seamless application across multiple accounts and regions while guaranteeing optimal performance.
 1. Efficient Multi-Account Support:
     * Effortlessly adapts to diverse multi-account scenarios.
