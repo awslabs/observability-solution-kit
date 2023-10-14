@@ -59,9 +59,9 @@ List of dependencies required for the SDK.
 
 ## Overview
 
-The Observability SDK provides tenant-aware logging, offering exceptional tools for tracking application behavior and quickly identifying issues.
+The Observability SDK provides context-aware logging, offering exceptional tools for tracking application behavior and quickly identifying issues.
 
-Using the `ollyv` SDK, tenant-aware structured log is created in a distributed microservice Lambda environment. It also allows you to maintain a tenant context between other services that interact with Lambda. And Logger can be configured using the configuration which should be defined by yourself.
+Using the `ollyv` SDK, context-aware structured log is created in a distributed microservice Lambda environment. It also allows you to maintain a tenant context between other services that interact with Lambda. And Logger can be configured using the configuration which should be defined by yourself.
 
 Using this module in the Lambda function will operate internally as shown below.
 
@@ -206,7 +206,7 @@ To apply the logging module to a lambda function, follow this steps:
 1️⃣ Import the Logger, middleware, and interceptor from the ollyv/sdk-lambda-logging module. It is included as a dependency in the lambda layer. Also, import the LOG_CONFIG which should be defined by yourself.
 
 ```javascript
-const LOG_CONFIG = <configuration-for-logger>;
+const LOG_CONFIG = <path/to/config>;
 const { Logger, middlewares, interceptor } = require('@ollyv/lambda');
 ```
 
@@ -215,7 +215,7 @@ const { Logger, middlewares, interceptor } = require('@ollyv/lambda');
 > The LOG_CONFIG might be defined in the `<path/to/config>`. This means that the configuration of the logger is a parameter in the parameter store. If LOG_CONFIG is not specified or if `“enableLogging"=false` in `LOG_CONFIG`, `logger.info()` internally outputs the log using `console.log()`.
 
 ```javascript
-const LOG_CONFIG = <configuration-for-logger>;
+const LOG_CONFIG = <path/to/config>;
 const { Logger, middlewares, interceptor } = require('@ollyv/lambda');
 
 const logger = new Logger(LOG_CONFIG);
@@ -224,7 +224,7 @@ const logger = new Logger(LOG_CONFIG);
 > (Optional) Logger can be created with logLevel, serviceName options. If logLevel options is set to one of `INFO`, `WARN`, `ERROR`, `DEBUG`, logger will be set it’s log level. And, if serviceName is set to some string value, it will always be presented in the service_name of the log.
 
 ```javascript
-const LOG_CONFIG = <configuration-for-logger>;
+const LOG_CONFIG = <path/to/config>;
 const logger = new Logger(LOG_CONFIG, { serviceName: 'my-servie', logLevel: 'INFO' });
 ```
 
@@ -245,7 +245,7 @@ const lambdeHandler = async (event, context) => {
 exports.handler = middlewares(lambdaHandler).use(interceptor(logger));
 ```
 
-5️⃣ Change all existing console.log() statements in the Lambda function to appropriate log levels like logger.info(), logger.error(), etc. By doing this, the tenant-aware structured log will be applied within the Lambda function.
+5️⃣ Change all existing console.log() statements in the Lambda function to appropriate log levels like logger.info(), logger.error(), etc. By doing this, the context-aware structured log will be applied within the Lambda function.
 
 ```javascript
 const lambdaHandler = async (event, context) => {
@@ -316,7 +316,7 @@ exports.handler = async (event, context) => {
 **[TO-BE]**
 
 ```javascript
-const LOG_CONFIG = { <Configuration for logger...> }
+const LOG_CONFIG = <path/to/config>;
 const { Logger, middlewares, interceptor } = require('@ollyv/lambda');
 const logger = new Logger(LOG_CONFIG);
 ...
@@ -330,10 +330,11 @@ logger.warn('Hello from Lambda');
 
 // If the Lambda function uses services,
 // you need to propagate the tenant context to the target services.
-...
+
 };
 
 exports.handler = middlewares(lambdaHandler).use(interceptor(logger));
+
 ```
 
 The log is output as follows.
@@ -379,7 +380,7 @@ If you want to `ollyv` Logger for JavaScript class, please follow these steps.
 1. Import the Logger from the `@ollyv/lambda` module and `LOG_CONFIG` which should be defined by yourseld, and declare the logger as let variable.
 
    ```javascript
-   const LOG_CONFIG = { <Configuration for logger...> }
+   const LOG_CONFIG = <path/to/config>;
    const { Logger } = require('@ollyv/lambda');
    let logger;
    ```
@@ -400,7 +401,7 @@ If you want to `ollyv` Logger for JavaScript class, please follow these steps.
    > (Optional) Logger can be created with logLevel, serviceName options. If logLevel options is set to one of `INFO`, `WARN`, `ERROR`, `DEBUG`, logger will be set it’s log level. And, if serviceName is set to some string value, it will always be presented in the `service` of the log.
 
    ```javascript
-   const LOG_CONFIG = '{ <Configuration for logger...> }'
+   const LOG_CONFIG = <path/to/config>;
 
    class MyClass {
    constructor() {
