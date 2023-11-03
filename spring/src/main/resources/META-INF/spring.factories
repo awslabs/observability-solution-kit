@@ -1,2 +1,2 @@
 org.springframework.boot.env.EnvironmentPostProcessor=\
-  com.amazon.sdk.spring.logging.CustomEnvironmentPostProcessor
+  org.ollyv.spring.logging.CustomEnvironmentPostProcessor

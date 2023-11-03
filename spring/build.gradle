@@ -4,6 +4,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE' apply false
     id 'maven-publish'
     id 'jacoco'
+    id 'signing'
 }
 
 apply plugin: 'org.springframework.boot'
@@ -13,8 +14,8 @@ apply plugin: 'groovy'
 apply plugin: 'java-library'
 apply plugin: 'org.gradle.java'
 
-group = 'com.amazon.ollyv'
-version System.getenv("PUBLISH_VERSION")
+group = 'org.ollyv'
+version = '0.0.2'
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 configurations {
@@ -32,18 +33,44 @@ allprojects {
 
 publishing {
     publications {
-        myLibrary(MavenPublication) {
+        mavenJava(MavenPublication) {
+            groupId = "$group"
+            artifactId = 'spring'
+            version = "$version"
             from components.java
+
+            pom {
+                name = 'The Observability SDK'
+                description = 'Ollyv features a robust Centralized Logging Architecture, ensuring seamless application across multiple accounts and regions while guaranteeing optimal performance'
+                url = 'https://github.com/awslabs/observability-solution-kit'
+                licenses {
+                    license {
+                        name = 'Apache License, Version 2.0'
+                        url = 'https://aws.amazon.com/apache2.0'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'kmhak'
+                        name = 'HakSung Kim'
+                        email = 'twoday.me@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/awslabs/observability-solution-kit'
+                    developerConnection = 'scm:git:ssh://github.com/awslabs/observability-solution-kit'
+                    url = 'https://github.com/awslabs/observability-solution-kit'
+                }
+            }
         }
     }
-
     repositories {
         maven {
+            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
             credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
+                username = project.property('ossrhUsername')
+                password = project.property('ossrhPassword')
             }
-            url = uri(System.getenv("PUBLISH_URL"))
         }
     }
 }
@@ -96,4 +123,8 @@ javadoc {
     options.bottom = "5kSaaS Javadoc, Made with FIVE KIMS"
     options.addStringOption('Xdoclint:none', '-quiet')
     options.destinationDirectory = new File(projectDir, "/docs/jdk8")
+}
+
+signing {
+    sign publishing.publications.mavenJava
 }
