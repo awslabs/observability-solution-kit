@@ -2,7 +2,7 @@
 <configuration debug="true">
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="com.amazon.sdk.spring.logging.layout.CustomJsonLayout">
+            <layout class="org.ollyv.spring.logging.layout.CustomJsonLayout">
                 <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter" />
                 <timestampFormat>yyyy-MM-dd'T'HH:mm:ss.SSSZZ</timestampFormat>
                 <timestampFormatTimezoneId>Etc/UTC</timestampFormatTimezoneId>

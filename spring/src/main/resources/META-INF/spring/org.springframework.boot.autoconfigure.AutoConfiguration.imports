@@ -1,1 +1,1 @@
-com.amazon.sdk.spring.SaasModuleAutoConfiguration
+org.ollyv.spring.SaasModuleAutoConfiguration
