@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
-  Get Started with <a href="./sdk/lambda/README.md"> NodeLambda ✨</a>
+  Get Started with <a href="./lambda/README.md"> NodeLambda ✨</a>
   ·
-  <a href="./sdk/express/README.md"> NodeExpress 👟</a>
+  <a href="./express/README.md"> NodeExpress 👟</a>
   ·
-  <a href="./sdk/spring/README.md"> JavaSpring 🦚</a>
+  <a href="./spring/README.md"> JavaSpring 🦚</a>
 </p>
 
 ### 🫒 Key feature
