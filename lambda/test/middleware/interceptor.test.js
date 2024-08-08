@@ -66,7 +66,7 @@ describe('interceptor', () => {
     await interceptor(logger).before(request);
 
     expect(logger.initLogger).not.toHaveBeenCalled();
-    expect(logger.info).toHaveBeenCalledWith('[5k-saas][interceptor] Logger is disabled. skip interceptor...');
+    expect(logger.info).toHaveBeenCalledWith('[O11yv][interceptor] Logger is disabled. skip interceptor...');
   });
 
   it('should handle errors when loading log configuration', async () => {
@@ -77,7 +77,7 @@ describe('interceptor', () => {
 
     expect(logger.initLogger).not.toHaveBeenCalled();
     expect(logger.info).toHaveBeenCalledWith(
-      '[5k-saas][interceptor] Cannot read config. please check if config is valid. skip interceptor...'
+      '[O11yv][interceptor] Cannot read config. please check if config is valid. skip interceptor...'
     );
   });
 

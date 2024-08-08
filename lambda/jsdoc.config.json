@@ -7,8 +7,8 @@
     "theme_opts": {
       "default_theme": "dark",
       "search": false,
-      "title": "<a href=\"index.html\" class=\"sidebar-title\" >5k-saas: NodeLambda</a>",
-      "homepageTitle": "5k-saas Docs: NodeLambda",
+      "title": "<a href=\"index.html\" class=\"sidebar-title\" >O11yv: NodeLambda</a>",
+      "homepageTitle": "O11yv Docs: NodeLambda",
       "includeFilesListInHomepage": true
     }
   },
