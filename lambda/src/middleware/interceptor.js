@@ -14,7 +14,7 @@ import CONTEXT_TYPE from '../const/contextTypeConst.js';
  * * 3) (If logger is enabled) Append tenant context into logger.
  * * 4) (If logger is enabled) Append tenant context into lambda event.
  *
- * @param {Logger} logger - (required) Logger from @5k-saas/sdk-lambda-logging
+ * @param {Logger} logger - (required) Logger from @O11yv/sdk-lambda-logging
  * @returns {Object} Object containing a 'before' function to be used as a before middleware.
  */
 function interceptor(logger) {
@@ -22,15 +22,15 @@ function interceptor(logger) {
   const customMiddlewareBefore = async (request) => {
     try {
       if (!(logger?.config?.logConst || logger?.logOptions || logger?.headerLogFormat)) {
-        logger.info('[5k-saas][interceptor] Cannot read config. please check if config is valid. skip interceptor...');
+        logger.info('[O11yv][interceptor] Cannot read config. please check if config is valid. skip interceptor...');
         return;
       }
       if (!logger?.isEnabled) {
-        logger.info('[5k-saas][interceptor] Logger is disabled. skip interceptor...');
+        logger.info('[O11yv][interceptor] Logger is disabled. skip interceptor...');
         return;
       }
     } catch (e) {
-      logger.warn('[5k-saas][interceptor] Error occurred. Skip interceptor... error: ', e);
+      logger.warn('[O11yv][interceptor] Error occurred. Skip interceptor... error: ', e);
       return;
     }
 

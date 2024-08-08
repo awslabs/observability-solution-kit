@@ -69,7 +69,7 @@ export default class ContextExtractor {
             key: logConst?.LOG_CONTEXT_FROM_ECS_KEY,
           });
         } else {
-          console.warn('[5k-saas][contextExtractor] Cannot understand context');
+          console.warn('[O11yv][contextExtractor] Cannot understand context');
           contextType = undefined;
           tenantContext = undefined;
         }

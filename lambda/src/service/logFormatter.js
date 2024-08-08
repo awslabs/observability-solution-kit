@@ -28,7 +28,7 @@ export default class LogFormatter {
         _.set(obj, format[key], value);
       }
     } catch (e) {
-      console.warn(`[5k-saas][LogFormatter] initFormat() failed: ${e}`);
+      console.warn(`[O11yv][LogFormatter] initFormat() failed: ${e}`);
     }
     return obj;
   }
@@ -48,7 +48,7 @@ export default class LogFormatter {
         _.set(obj, format[key], fromContext);
       }
     } catch (e) {
-      console.warn(`[5k-saas][logFormatter] apply() failed: ${e}`);
+      console.warn(`[O11yv][logFormatter] apply() failed: ${e}`);
     }
     return obj;
   }
