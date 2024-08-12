@@ -43,7 +43,12 @@ publishing {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")
             }
-            url = uri(System.getenv("PUBLISH_URL"))
+            // url = uri(System.getenv("PUBLISH_URL"))
+            if (System.getenv("PUBLISH_URL") != null) {
+                url = uri(System.getenv("PUBLISH_URL"))
+            } else {
+                url = ""
+            }
         }
     }
 }
@@ -89,11 +94,11 @@ tasks.named('compileJava') {
 javadoc {
     source = "${projectDir}/src/main"
     exclude "resources/**"
-    title = "5kSaaS Javadoc"
+    title = "Ollyv Javadoc"
     options.locale = "en"
     options.charSet = "UTF-8"
     options.encoding = "UTF-8"
-    options.bottom = "5kSaaS Javadoc, Made with FIVE KIMS"
+    options.bottom = "Ollyv Javadoc, Made with FIVE KIMS"
     options.addStringOption('Xdoclint:none', '-quiet')
     options.destinationDirectory = new File(projectDir, "/docs/jdk8")
 }
