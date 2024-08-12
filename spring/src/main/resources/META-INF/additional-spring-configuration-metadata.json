@@ -1,9 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "saas.observability.logging.enable",
-      "type": "java.lang.Boolean",
-      "description": "Enable TenantAware Structured logging (true or false)"
-    }
-  ]
-}
