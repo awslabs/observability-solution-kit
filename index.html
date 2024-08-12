@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ollyv 🫒</title>
+  </head>
+  <body>
+    <h1>Welcome to Ollyv 🫒</h1>
+
+    <h2>Express SDK</h2>
+    <ul id="express-release-list"></ul>
+
+    <h2>Lambda SDK</h2>
+    <ul id="lambda-release-list"></ul>
+
+    <h2>Java SDK</h2>
+    <ul id="java-release-list"></ul>
+
+    <script>
+      async function loadReleases(service, elementId) {
+        try {
+          const response = await fetch(`${service}/release.history`);
+          if (!response.ok) {
+            throw new Error(`Network response was not ok for ${service}`);
+          }
+          const text = await response.text();
+          const releases = text
+            .split("\n")
+            .filter((line) => line.trim() !== "");
+          const releaseList = document.getElementById(elementId);
+
+          releases.forEach((release) => {
+            const listItem = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = `${service}/${release}/index.html`;
+            link.textContent = `Version ${release}`;
+            listItem.appendChild(link);
+            releaseList.appendChild(listItem);
+          });
+        } catch (error) {
+          console.error(`Error loading release history for ${service}:`, error);
+        }
+      }
+
+      loadReleases("express", "express-release-list");
+      loadReleases("lambda", "lambda-release-list");
+      loadReleases("java", "java-release-list");
+    </script>
+  </body>
+</html>
