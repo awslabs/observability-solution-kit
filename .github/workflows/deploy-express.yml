@@ -36,7 +36,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./express/docs
-          destination_dir: express
+          destination_dir: express/${{ github.event.release.tag_name }}
 
       # - name: Publish to npm
       #   env:
