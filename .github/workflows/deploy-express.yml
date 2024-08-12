@@ -36,7 +36,15 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./express/docs
-          destination_dir: express
+          destination_dir: express/${{ github.event.release.tag_name }}
+      
+      - name: Generate Index Page 
+        run: |
+          echo "<html><body><h1>Express SDK Documentation</h1><ul>" > index.html
+          for dir in $(ls express); do
+            echo "<li><a href=\"express/$dir/index.html\">Version $dir</a></li>" >> index.html
+          done
+          echo "</ul></body></html>" >> index.html
 
       # - name: Publish to npm
       #   env:
