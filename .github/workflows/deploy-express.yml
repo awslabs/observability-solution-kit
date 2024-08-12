@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - devops/*
     paths:
       - 'express/**'
   release:
@@ -29,6 +30,15 @@ jobs:
 
       - name: Generate JSDoc
         run: cd express && npm run jsdoc
+      
+      - name: Determine Destination Directory
+        id: get-destination-dir
+        run: |
+          if [ -z "${{ github.event.release.tag_name }}" ]; then
+            echo "destination_dir=temp_tag" >> $GITHUB_ENV
+          else
+            echo "destination_dir=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          fi
 
       - name: Deploy JSDoc to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -36,16 +46,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./express/docs
-          destination_dir: express/${{ github.event.release.tag_name }}
+          destination_dir: express/${{ env.destination_dir }}
       
-      - name: Generate Index Page 
-        run: |
-          echo "<html><body><h1>Express SDK Documentation</h1><ul>" > index.html
-          for dir in $(ls express); do
-            echo "<li><a href=\"express/$dir/index.html\">Version $dir</a></li>" >> index.html
-          done
-          echo "</ul></body></html>" >> index.html
-
       # - name: Publish to npm
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
