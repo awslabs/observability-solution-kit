@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/awslabs/observability-solution-kit/issues"
   },
-  "homepage": "https://github.com/awslabs/observability-solution-kit#readme"
+  "homepage": "https://github.com/awslabs/observability-solution-kit#readme",
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
 }
