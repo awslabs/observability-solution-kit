@@ -33,7 +33,12 @@ jobs:
       
       - name: Determine Destination Directory
         id: get-destination-dir
-        run: echo "destination_dir=$(if [ -z \"${{ github.event.release.tag_name }}\" ]; then echo 'temp_tag'; else echo \"${{ github.event.release.tag_name }}\"; fi)" >> $GITHUB_ENV
+        run: |
+          if [ -z "${{ github.event.release.tag_name }}" ]; then
+            echo "destination_dir=temp_tag" >> $GITHUB_ENV
+          else
+            echo "destination_dir=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          fi
 
       - name: Deploy JSDoc to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
