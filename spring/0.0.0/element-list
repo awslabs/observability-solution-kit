@@ -1,0 +1,10 @@
+com.amazon.sdk.spring
+com.amazon.sdk.spring.common.message
+com.amazon.sdk.spring.common.service
+com.amazon.sdk.spring.logging
+com.amazon.sdk.spring.logging.configuration
+com.amazon.sdk.spring.logging.interceptor
+com.amazon.sdk.spring.logging.layout
+com.amazon.sdk.spring.logging.message
+com.amazon.sdk.spring.logging.service
+com.amazon.sdk.spring.tracing
