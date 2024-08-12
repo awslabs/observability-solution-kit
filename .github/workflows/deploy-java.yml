@@ -18,19 +18,19 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
-          distribution: 'adopt'
-          java-version: '11'
+          java-version: '17'
+          distribution: 'corretto'
 
       - name: Build project
         run: ./gradlew build
 
       - name: Run tests
-        run: ./gradlew :sdk:spring:test
+        run: ./gradlew :spring:test
 
       - name: Generate Javadoc
-        run: ./gradlew :sdk:spring:javadoc
+        run: ./gradlew :spring:javadoc
 
       - name: Determine Destination Directory
         id: get-destination-dir
@@ -48,4 +48,3 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./spring/build/docs/javadoc
           destination_dir: spring/${{ env.destination_dir }}
-
