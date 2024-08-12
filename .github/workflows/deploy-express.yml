@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - devops/*
     paths:
       - 'express/**'
   release:
@@ -45,6 +46,14 @@ jobs:
             echo "<li><a href=\"express/$dir/index.html\">Version $dir</a></li>" >> index.html
           done
           echo "</ul></body></html>" >> index.html
+      
+      - name: Deploy Index Page
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: .
+          destination_dir: .
 
       # - name: Publish to npm
       #   env:
