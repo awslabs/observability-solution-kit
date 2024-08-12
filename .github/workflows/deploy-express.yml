@@ -30,6 +30,10 @@ jobs:
 
       - name: Generate JSDoc
         run: cd express && npm run jsdoc
+      
+      - name: Determine Destination Directory
+        id: get-destination-dir
+        run: echo "destination_dir=$(if [ -z \"${{ github.event.release.tag_name }}\" ]; then echo 'temp_tag'; else echo \"${{ github.event.release.tag_name }}\"; fi)" >> $GITHUB_ENV
 
       - name: Deploy JSDoc to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -37,7 +41,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./express/docs
-          destination_dir: express/${{ github.event.release.tag_name }}
+          destination_dir: express/${{ env.destination_dir }}
       
       # - name: Publish to npm
       #   env:
