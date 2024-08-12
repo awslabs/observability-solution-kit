@@ -1,0 +1,33 @@
+name: Deploy Express SDK
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'express/**'
+  release:
+    types: [created]
+
+jobs:
+  build-and-deploy-express:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: cd express && npm install
+
+      - name: Run tests
+        run: cd express && npm test
+
+      # - name: Publish to npm
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: cd express && npm publish
