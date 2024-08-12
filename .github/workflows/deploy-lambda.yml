@@ -1,0 +1,54 @@
+name: Deploy Lambda SDK
+
+on:
+  push:
+    branches:
+      - main
+      - devops/*
+    paths:
+      - 'lambda/**'
+  release:
+    types: [created]
+
+jobs:
+  build-and-deploy-lambda:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: cd lambda && npm install
+
+      - name: Run tests
+        run: cd lambda && npm test
+
+      - name: Generate JSDoc
+        run: cd lambda && npm run jsdoc
+      
+      - name: Determine Destination Directory
+        id: get-destination-dir
+        run: |
+          if [ -z "${{ github.event.release.tag_name }}" ]; then
+            echo "destination_dir=temp_tag" >> $GITHUB_ENV
+          else
+            echo "destination_dir=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          fi
+
+      - name: Deploy JSDoc to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./lambda/docs
+          destination_dir: lambda/${{ env.destination_dir }}
+      
+      # - name: Publish to npm
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: cd lambda && npm publish
