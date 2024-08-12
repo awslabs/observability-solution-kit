@@ -35,7 +35,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./express/docs
+          destination_dir: ./express/docs
 
       # - name: Publish to npm
       #   env:
