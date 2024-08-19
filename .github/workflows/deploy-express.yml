@@ -26,7 +26,7 @@ jobs:
         run: cd express && npm install
 
       - name: Run tests
-        run: cd express && npm test --coverage
+        run: cd express && npm test -- --coverage
 
       - name: Generate JSDoc
         run: cd express && npm run jsdoc
