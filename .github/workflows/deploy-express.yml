@@ -50,10 +50,10 @@ jobs:
 
       - name: Verify coverage
         run: |
-          COVERAGE=$(grep -o 'All files.*' express/coverage/lcov-report/index.html | awk '{print $4}' | sed 's/%//')
-          echo "Coverage is $COVERAGE%"
-          if [ $(echo "$COVERAGE < 80" | bc -l) -eq 1 ]; then
-            echo "Test coverage is below 80%"; exit 1;
+          LINES_COVERAGE=$(npm run test -- --coverage --coverageReporters=text-summary | grep 'Lines' | awk '{print $3}' | sed 's/%//')
+          echo "Lines coverage is $LINES_COVERAGE%"
+          if (( $(echo "$LINES_COVERAGE < 80" |bc -l) )); then
+            echo "Lines coverage is below 80%"; exit 1;
           fi
         shell: bash
       
