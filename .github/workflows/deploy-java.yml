@@ -1,0 +1,50 @@
+name: Deploy Spring SDK
+
+on:
+  push:
+    branches:
+      - main
+      - devops/*
+    paths:
+      - 'spring/**'
+  release:
+    types: [created]
+
+jobs:
+  build-and-deploy-spring:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: Build project
+        run: ./gradlew build
+
+      - name: Run tests
+        run: ./gradlew :spring:test
+
+      - name: Generate Javadoc
+        run: ./gradlew :spring:javadoc
+
+      - name: Determine Destination Directory
+        id: get-destination-dir
+        run: |
+          if [ -z "${{ github.event.release.tag_name }}" ]; then
+            echo "destination_dir=temp_tag" >> $GITHUB_ENV
+          else
+            echo "destination_dir=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          fi
+
+      - name: Deploy Javadoc to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./spring/docs/jdk8
+          destination_dir: spring/${{ env.destination_dir }}
