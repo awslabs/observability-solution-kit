@@ -26,7 +26,7 @@ jobs:
         run: cd express && npm install
 
       - name: Run tests
-        run: cd express && npm test
+        run: cd express && npm test --coverage
 
       - name: Generate JSDoc
         run: cd express && npm run jsdoc
@@ -47,6 +47,15 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./express/docs
           destination_dir: express/${{ env.destination_dir }}
+
+      - name: Verify coverage
+        run: |
+          COVERAGE=$(grep -o 'All files.*' express/coverage/lcov-report/index.html | awk '{print $4}' | sed 's/%//')
+          echo "Coverage is $COVERAGE%"
+          if [ $(echo "$COVERAGE < 80" | bc -l) -eq 1 ]; then
+            echo "Test coverage is below 80%"; exit 1;
+          fi
+        shell: bash
       
       # - name: Publish to npm
       #   env:
