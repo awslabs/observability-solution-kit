@@ -40,7 +40,7 @@
     "@aws-lambda-powertools/logger": "^1.9.0",
     "@middy/core": "^4.5.2",
     "callee": "^1.1.1",
-    "cookie": "^0.5.0",
+    "cookie": "^0.7.0",
     "jsonwebtoken": "^9.0.1",
     "lodash": "^4.17.21"
   },
