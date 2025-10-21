@@ -10,6 +10,10 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   build-and-deploy-lambda:
     runs-on: ubuntu-latest
